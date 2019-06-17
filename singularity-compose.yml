@@ -1,24 +1,24 @@
 version: "1.0"
-services:
+instances:
 
   nginx:
     build:
       context: ./nginx
-      singularity: Singularity.nginx
+      recipe: Singularity.nginx
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./uwsgi_params.par:/etc/nginx/uwsgi_params.par:ro
     volumes_from:
-      - uwsgi
+      - app
     ports:
       - "80"
 
   db:
-    image: postgres:9.4
+    image: docker://postgres:9.4
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  uwsgi:
+  app:
     build:
       context: ./app
     volumes:
