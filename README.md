@@ -15,6 +15,7 @@ paired with the [specification](https://github.com/singularityhub/singularity-co
 to understand the fields provided. 
 
 ### Instance folders
+
 Generally, each section in the yaml file corresponds with a container instance to be run, 
 and each container instance is matched to a folder in the present working directory.
 For example, if I give instruction to build an [nginx](nginx) instance from
@@ -67,11 +68,95 @@ The following commands are currently supported.
 
 Build will either build a container recipe, or pull a container to the
 instance folder. In both cases, it's named after the instance so we can
-easily tell if we've already built or pulled it.
+easily tell if we've already built or pulled it. This is typically
+the first step that you are required to do in order to build or pull your
+recipes. It ensures reproducibility because we ensure the container binary
+exists first.
 
 ```bash
-$ singularity-compose build .
+$ singularity-compose build
 ```
 
-The "." at the end indicates we are building in the present working directory,
-which is the most common use case.
+The working directory is the parent folder of the singularity-compose.yml file.
+
+### Create
+
+Given that you have built your containers with `singularity-compose build`,
+you can create your instances as follows:
+
+```bash
+$ singularity-compose create
+```
+
+
+### Down
+
+You can bring one or more instances down (meaning, stopping them) by doing:
+
+```bash
+$ singularity-compose down
+Stopping (instance:nginx)
+Stopping (instance:db)
+Stopping (instance:app)
+```
+
+To stop a custom set, just specify them:
+
+```bash
+$ singularity-compose down nginx
+```
+
+### Config
+
+You can load and validate the configuration file (singularity-compose.yml) and
+print it to the screen as follows:
+
+```bash
+$ singularity-compose config .
+{
+    "version": "1.0",
+    "instances": {
+        "nginx": {
+            "build": {
+                "context": "./nginx",
+                "recipe": "Singularity.nginx"
+            },
+            "volumes": [
+                "./nginx.conf:/etc/nginx/conf.d/default.conf:ro",
+                "./uwsgi_params.par:/etc/nginx/uwsgi_params.par:ro",
+                ".:/code",
+                "./static:/var/www/static",
+                "./images:/var/www/images"
+            ],
+            "volumes_from": [
+                "app"
+            ],
+            "ports": [
+                "80"
+            ]
+        },
+        "db": {
+            "image": "docker://postgres:9.4",
+            "volumes": [
+                "db-data:/var/lib/postgresql/data"
+            ]
+        },
+        "app": {
+            "build": {
+                "context": "./app"
+            },
+            "volumes": [
+                ".:/code",
+                "./static:/var/www/static",
+                "./images:/var/www/images"
+            ],
+            "ports": [
+                "5000:80"
+            ],
+            "depends_on": [
+                "nginx"
+            ]
+        }
+    }
+}
+```

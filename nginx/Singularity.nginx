@@ -20,4 +20,4 @@ From: alpine:3.4
     mkdir -p /tmp/0 /tmp/1 /tmp/2 /tmp/3 /tmp/4 /tmp/5 /tmp/6 /tmp/7 /tmp/8 /tmp/9
 
 %startscript
-    exec nginx -g daemon off;
+    exec nginx -g "daemon off;"
