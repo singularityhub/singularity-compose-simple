@@ -88,6 +88,35 @@ you can create your instances as follows:
 $ singularity-compose create
 ```
 
+### Up
+
+If you want to both build and bring them up, you can use "up." Note that for
+builds that require sudo, this will still stop and ask you to build with sudo.
+
+```bash
+$ singularity-compose up
+```
+
+### ps
+
+You can list running instances with "ps":
+
+```bash
+$ singularity-compose ps
+INSTANCES  NAME PID     IMAGE
+1           app	6659	app.sif
+2            db	6788	db.sif
+3         nginx	6543	nginx.sif
+```
+
+### Shell
+
+You can easily shell inside of a running instance:
+
+```bash
+$ singularity-compose shell app
+Singularity app.sif:~/Documents/Dropbox/Code/singularity/singularity-compose-example> 
+```
 
 ### Down
 
@@ -101,6 +130,8 @@ Stopping (instance:app)
 ```
 
 To stop a custom set, just specify them:
+
+# TODO: from inside the container, need to be able to see hostname
 
 ```bash
 $ singularity-compose down nginx

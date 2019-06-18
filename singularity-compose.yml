@@ -8,24 +8,27 @@ instances:
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - ./uwsgi_params.par:/etc/nginx/uwsgi_params.par
+    ports:
+      - 80:80
+    depends_on:
+      - db
     volumes_from:
       - app
-    ports:
-      - "80"
 
   db:
     image: docker://postgres:9.4
+    ports:
+      - 5432:5432
     volumes:
-      - db-data:/var/lib/postgresql/data
-
+      - ./db-data:/var/lib/postgresql/data
   app:
     build:
       context: ./app
     volumes:
-      - .:/code
+      - ./app:/code
       - ./static:/var/www/static
       - ./images:/var/www/images
     ports:
-      - "5000:80"
+      - 5000:5000
     depends_on:
       - nginx
