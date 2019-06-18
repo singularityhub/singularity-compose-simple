@@ -131,11 +131,28 @@ Stopping (instance:app)
 
 To stop a custom set, just specify them:
 
-# TODO: from inside the container, need to be able to see hostname
 
 ```bash
 $ singularity-compose down nginx
 ```
+
+### Logs
+
+You can of course view logs for all instances, or just specific named ones:
+
+```bash
+$ singularity-compose logs --tail 10
+nginx ERR
+nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+2019/06/18 15:41:35 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+2019/06/18 16:04:42 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+2019/06/18 16:50:03 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+2019/06/18 16:51:32 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+``
 
 ### Config
 
