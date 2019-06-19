@@ -10,8 +10,6 @@ instances:
       - ./uwsgi_params.par:/etc/nginx/uwsgi_params.par
     ports:
       - 80:80
-    depends_on:
-      - db
     volumes_from:
       - app
 
@@ -32,3 +30,4 @@ instances:
       - 5000:5000
     depends_on:
       - nginx
+      - db

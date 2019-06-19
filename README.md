@@ -118,6 +118,36 @@ $ singularity-compose shell app
 Singularity app.sif:~/Documents/Dropbox/Code/singularity/singularity-compose-example> 
 ```
 
+### Exec
+
+You can easily execute a command to a running instance:
+
+```bash
+$ singularity-compose exec app ls /
+bin
+boot
+code
+dev
+environment
+etc
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+singularity
+srv
+sys
+tmp
+usr
+var
+```
+
 ### Down
 
 You can bring one or more instances down (meaning, stopping them) by doing:
