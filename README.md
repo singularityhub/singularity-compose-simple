@@ -1,9 +1,10 @@
-# Singularity Compose Example
+# Singularity Compose Simple
 
-**under development**
-
-This is an example of simple container orchestration with singularity-compose,
-It is based on [django-nginx-upload](https://github.com/vsoch/django-nginx-upload).
+This is a simple, dummy example of creating a web application with Singularity
+using just one container. Since Singularity network bridges get buggy given a user
+(like myself) has Docker installed, this example oversteps that by not
+requiring communiction between containers. It is still based on 
+[django-nginx-upload](https://github.com/vsoch/django-nginx-upload).
 
 ## Setup
 

@@ -1,5 +1,7 @@
+*.sqlite3
 *.sif
 static/
 images/
+nginx/cache
 migrations
 __pycache__

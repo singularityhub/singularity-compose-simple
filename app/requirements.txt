@@ -1,3 +1,2 @@
-uwsgi
 Django>=2.0.8
-psycopg2-binary
+uwsgi
