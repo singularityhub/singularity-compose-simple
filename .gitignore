@@ -1,3 +1,4 @@
+nginx.pid
 *.sqlite3
 *.sif
 static/
