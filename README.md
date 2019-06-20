@@ -1,11 +1,13 @@
 # Singularity Compose Simple
 
-This is a simple, dummy example of creating a web application with Singularity
+This is a simple, dummy example of creating a web application with 
+[singularity-compose](https://singularityhub.github.io/singularity-compose/)
 using just one container. Since Singularity network bridges get buggy given a user
 (like myself) has Docker installed, this example oversteps that by not
 requiring communiction between containers. The multiple container
 example (that still has this issue) can be found at 
-[singularityhub/singularity-compose-example](https://www.github.com/singularityhub/singularity-compose-example). Both are based on [django-nginx-upload](https://github.com/vsoch/django-nginx-upload).
+[singularityhub/singularity-compose-example](https://www.github.com/singularityhub/singularity-compose-example). 
+Both are based on [django-nginx-upload](https://github.com/vsoch/django-nginx-upload).
 
 ## Setup
 
