@@ -2,10 +2,8 @@
 
 This is a simple, dummy example of creating a web application with 
 [singularity-compose](https://singularityhub.github.io/singularity-compose/)
-using just one container. Since Singularity network bridges get buggy given a user
-(like myself) has Docker installed, this example oversteps that by not
-requiring communiction between containers. The multiple container
-example (that still has this issue) can be found at 
+using just one container. The multiple container
+example (that for some may require an update to Singularity) can be found at 
 [singularityhub/singularity-compose-example](https://www.github.com/singularityhub/singularity-compose-example). 
 Both are based on [django-nginx-upload](https://github.com/vsoch/django-nginx-upload).
 
@@ -105,13 +103,13 @@ $ singularity-compose exec app uname -a
 When you open your browser to [http://127.0.0.1](http://127.0.0.1)
 you should see the upload interface. 
 
-![images/upload.png](images/upload.png)
+![img/upload.png](img/upload.png)
 
 If you drop a file in the box (or click
 to select) we will use the nginx-upload module to send it directly to the
 server. Cool!
 
-![images/content.png](images/content.png)
+![img/content.png](img/content.png)
 
 This is just a simple Django application, the database is sqlite3, in the
 app folder:
@@ -296,16 +294,34 @@ You can of course view logs for all instances, or just specific named ones:
 
 ```bash
 $ singularity-compose logs --tail 10
-nginx ERR
-nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-2019/06/18 15:41:35 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-2019/06/18 16:04:42 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-2019/06/18 16:50:03 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-2019/06/18 16:51:32 [emerg] 15#15: host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
-nginx: [emerg] host not found in upstream "uwsgi" in /etc/nginx/conf.d/default.conf:22
+```
+
+or 
+
+```bash
+$ singularity-compose logs app --tail 10
+app OUT
+Running migrations:
+  No migrations to apply.
+No changes detected in app 'main'
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, main, sessions
+Running migrations:
+  No migrations to apply.
+
+0 static files copied to '/var/www/static', 121 unmodified.
+
+
+app ERR
+Fri Jun 21 10:06:34 2019 - WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x557dc822b920 pid: 27 (default app)
+Fri Jun 21 10:06:34 2019 - uWSGI running as root, you can use --uid/--gid/--chroot options
+Fri Jun 21 10:06:34 2019 - *** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+Fri Jun 21 10:06:34 2019 - *** uWSGI is running in multiple interpreter mode ***
+Fri Jun 21 10:06:34 2019 - spawned uWSGI master process (pid: 27)
+Fri Jun 21 10:06:34 2019 - spawned uWSGI worker 1 (pid: 29, cores: 1)
+Fri Jun 21 10:13:02 2019 - SIGINT/SIGQUIT received...killing workers...
+Fri Jun 21 10:13:03 2019 - worker 1 buried after 1 seconds
+Fri Jun 21 10:13:03 2019 - goodbye to uWSGI.
 ``
 
 ### Config

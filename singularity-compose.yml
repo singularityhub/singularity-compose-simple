@@ -14,5 +14,5 @@ instances:
     ports:
       - 80:80
     post:
-      command: ["mkdir", "-p", "./images/_upload/{0..9}", "&&", "chmod", "777", "-R", "./images"]
+      command: ["/bin/bash", "./app/run_post.sh"]
 
